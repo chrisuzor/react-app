@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 TodoCompleteAll.propTypes = {
-    remaining: PropTypes.func.isRequired
+  completeAllTodos: PropTypes.func.isRequired
 };
 
 function TodoCompleteAll(props) {
