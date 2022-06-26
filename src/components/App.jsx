@@ -3,34 +3,36 @@ import '../App.css';
 import NoTodos from './NoTodos';
 import TodoList from './TodoList';
 import TodoForm from './TodoForm';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import useLocalStorage from '../hooks/useLocalStorage';
+import { useEffect, useMemo, useRef } from 'react';
 
 function App() {
-    const [name, setName] = useState('');
+    const [name, setName] = useLocalStorage('name', '');
     const nameInputEl = useRef(null);
-    const [todos, setTodos] = useState([
-       {
-        id: 1,
-        title: 'Finish React Series',
-        isComplete: false,
-        isEditing: false
-       },
-       {
-        id: 2,
-        title: 'Go Grocery',
-        isComplete: true,
-        isEditing: false
-       },
-       {
-        id: 3,
-        title: 'Take over world',
-        isComplete: false,
-        isEditing: false
-       },
-    ]);
+    const [todos, setTodos] = useLocalStorage('todos', []);
+    // const [todos, setTodos] = useState([
+    //    {
+    //     id: 1,
+    //     title: 'Finish React Series',
+    //     isComplete: false,
+    //     isEditing: false
+    //    },
+    //    {
+    //     id: 2,
+    //     title: 'Go Grocery',
+    //     isComplete: true,
+    //     isEditing: false
+    //    },
+    //    {
+    //     id: 3,
+    //     title: 'Take over world',
+    //     isComplete: false,
+    //     isEditing: false
+    //    },
+    // ]);
 
     
-    const [idForTodo, setIdForTodo] = useState(4);
+    const [idForTodo, setIdForTodo] = useLocalStorage('idForTodo', 1);
 
 
     function addTodo(todo){
@@ -141,6 +143,9 @@ function App() {
         };
     }, []);
 
+    function handleNameInput(event){
+        setName(event.target.value);
+    }
 
   return (
     <div className="todo-app-container">
@@ -153,7 +158,7 @@ function App() {
                  ref={nameInputEl}
                   placeholder="What is your name?"
                   value={name}
-                  onChange={event => setName(event.target.value)}
+                  onChange={handleNameInput}
                   />
             </form>
             {name && <p className="name-label" >Hello, {name}</p>}
