@@ -20,7 +20,7 @@ export default function Blog() {
 
   return (
     <div className='container'>
-        <h2>Joke API </h2>
+        <h2>Joke APIS </h2>
         {isLoading && <div>Loading... </div>}
         {isSuccess && (
           <div>{joke.setup + ' ' + joke.punchline}</div>
